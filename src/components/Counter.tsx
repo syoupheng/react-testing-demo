@@ -24,7 +24,6 @@ export default function Counter({
     <>
       <div className="flex justify-between gap-8">
         <button
-          aria-label="decrement"
           className="text-4xl font-bold"
           onClick={decrement}
           disabled={count <= min}
@@ -33,7 +32,6 @@ export default function Counter({
         </button>
         <h1>{count}</h1>
         <button
-          aria-label="increment"
           className="text-4xl font-bold"
           onClick={increment}
           disabled={count >= max}
@@ -41,7 +39,7 @@ export default function Counter({
           +
         </button>
       </div>
-      <button aria-label="reset" className="mt-4" onClick={reset}>
+      <button className="mt-4" onClick={reset}>
         <GrPowerReset size={25} />
       </button>
     </>

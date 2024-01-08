@@ -1,6 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
 
 type Cat = {
   id: string;
@@ -17,9 +16,8 @@ async function fetchCat() {
 }
 
 export default function CatFetcher() {
-  const { data, error, isError, isPending, mutate } = useMutation({
+  const { data, isPending, isError, error, mutate } = useMutation({
     mutationFn: fetchCat,
-    onSuccess: () => toast.success("Here is a new cat !"),
   });
   const [hasFetched, setHasFetched] = useState(false);
 
@@ -35,14 +33,15 @@ export default function CatFetcher() {
       >
         {isPending ? "Loading..." : "Fetch a cat"}
       </button>
-      <div className="h-48 p-4">
+      <div className="h-56 p-4">
         {!hasFetched && <h2>No cat yet...</h2>}
-        {isError && <p>{error.message}</p>}
+        {isError && (
+          <h2 className="bg-red-400 rounded-md p-4">{error?.message}</h2>
+        )}
         {data && (
           <img className="object-cover h-48" src={data.url} alt="random cat" />
         )}
       </div>
-      <Toaster />
     </>
   );
 }
